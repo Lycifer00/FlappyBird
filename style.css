@@ -1,0 +1,25 @@
+.pipe {
+	width: 60px;
+	height: 100%;
+	position: absolute;
+	right: -60px;
+	z-index: 2;
+}
+
+.pipe.hidden {
+  display: none;
+}
+
+.pipe .topHalf {
+	background: url('https://s21.postimg.org/kyr2rnpzr/pipe.png') bottom;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
+.pipe .bottomHalf {
+	background: url('https://s21.postimg.org/kyr2rnpzr/pipe.png') top;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}

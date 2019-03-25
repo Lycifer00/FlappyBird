@@ -3,10 +3,11 @@ var pipes = [];
 var isGameOver = false;
 var userScore = 0;
 var safe = true;
-var life = 3;
+var score = new Audio();
+score.src = "score.mp3";
 
 function setup() {
-  createCanvas(1350, 580);
+  createCanvas(1350, 560);
   bird = new Bird();
   pipes.push(new Pipe());
 }
@@ -18,7 +19,6 @@ function draw() {
     for (var i = pipes.length - 1; i >= 0; i--) {
       pipes[i].show();
       pipes[i].update();
-
       if (pipes[i].hits(bird)) {
           isGameOver = true;
           safe = false;
@@ -30,6 +30,13 @@ function draw() {
       }
     }
 
+    for (var i=0; i < pipes.length; i++) {
+      if (pipes[i].x < bird.x) {
+        userScore = userScore + 0.028;
+        score.play();
+      }
+    }
+
     bird.update();
     bird.show();
 
@@ -38,35 +45,19 @@ function draw() {
     }
   }
 
-
-  if (safe) {
-    userScore++; 
-  } else {
-    console.log(userScore);
-  }
-
   fill(139, 115, 85);
   textSize(20);
   text('Score:', width-160, 30);
 
   fill(139, 115, 85);
   textSize(20);
-  text(userScore, width-100, 30);
+  text(Math.floor(userScore), width-100, 30);
   userScore = constrain(userScore, 0, userScore);
- 
-  fill(139, 115, 85);
-  textSize(20);
-  text('Lives:', (width/20)-55, 20);
-
-  fill(139, 115, 85);
-  textSize(20);
-  text(life, width/20, 20);
-
 }
 
 function keyPressed() {
   if (key == ' ') {
     bird.up();
-    //console.log("SPACE");
+    console.log("SPACE");
   }
 }
